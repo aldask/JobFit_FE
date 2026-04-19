@@ -25,7 +25,12 @@ export type FormSectionProps = {
 };
 
 export type ResumeFormProps = {
+  jobDescription: string;
+  fileError: string;
+  resumeFile: File | null;
   onSubmit: (data: ResumeInput) => void;
+  onJobDescriptionChange: (value: string) => void;
+  onResumeFileChange: (file: File | null) => void;
   loading: boolean;
 };
 
@@ -42,4 +47,11 @@ export type ResultCardProps = {
 export type StatusPanelProps = {
   loading: boolean;
   hasResult: boolean;
+  hasJobDescription: boolean;
+  hasResumeFile: boolean;
+};
+
+export type BuilderHeaderProps = {
+  loading: boolean;
+  canGenerate: boolean;
 };
