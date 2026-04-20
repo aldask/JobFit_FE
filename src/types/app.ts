@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 
 export type ResumeInput = {
   jobDescription: string;
-  resumeFile: File | null;
+  resumeFile: File;
 };
 
 export type ResumeResult = {
@@ -28,7 +28,8 @@ export type ResumeFormProps = {
   jobDescription: string;
   fileError: string;
   resumeFile: File | null;
-  onSubmit: (data: ResumeInput) => void;
+  canSubmit: boolean;
+  onSubmit: () => void;
   onJobDescriptionChange: (value: string) => void;
   onResumeFileChange: (file: File | null) => void;
   loading: boolean;
@@ -37,11 +38,14 @@ export type ResumeFormProps = {
 export type ResultsPanelProps = {
   loading: boolean;
   result: ResumeResult | null;
+  error: string;
+  jobDescription: string;
 };
 
 export type ResultCardProps = {
   title: string;
   body: string;
+  keywords: string[];
 };
 
 export type StatusPanelProps = {
