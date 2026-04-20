@@ -14,6 +14,21 @@ export type GenerateResumeRequest = ResumeInput;
 
 export type GenerateResumeResponse = ResumeResult;
 
+export type ApiErrorDetailItem = {
+  msg?: string;
+};
+
+export type ApiErrorPayload = {
+  detail?: string | ApiErrorDetailItem[];
+};
+
+export type CopyState = "idle" | "copied" | "failed";
+
+export type HighlightPart = {
+  highlighted: boolean;
+  value: string;
+};
+
 export type LayoutProps = {
   children: ReactNode;
 };
@@ -48,11 +63,26 @@ export type ResultCardProps = {
   keywords: string[];
 };
 
+export type HighlightedTextProps = {
+  text: string;
+  keywords: string[];
+};
+
+export type ErrorResultProps = {
+  message: string;
+};
+
 export type StatusPanelProps = {
   loading: boolean;
   hasResult: boolean;
   hasJobDescription: boolean;
   hasResumeFile: boolean;
+};
+
+export type StatusItem = {
+  label: string;
+  value: string;
+  ready: boolean;
 };
 
 export type BuilderHeaderProps = {

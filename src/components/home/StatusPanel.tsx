@@ -1,11 +1,11 @@
-import type { StatusPanelProps } from "../../types/app";
+import type { StatusItem, StatusPanelProps } from "../../types/app";
 
 const getStatusItems = (
   loading: boolean,
   hasResult: boolean,
   hasJobDescription: boolean,
   hasResumeFile: boolean,
-): Array<{ label: string; value: string; ready: boolean }> => [
+): StatusItem[] => [
   {
     label: "Resume",
     value: hasResumeFile ? "Ready" : "Waiting for upload",
