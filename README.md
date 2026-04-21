@@ -18,6 +18,16 @@ Backend:
 https://github.com/aldask/JobFit_BE
 ```
 
+Live preview:
+
+```text
+https://jobfit-gamma.vercel.app/
+```
+
+The frontend is deployed on Vercel. The backend is deployed as a Render web service.
+
+Render is using a free service, so the backend can take some time to wake up after being inactive. If generation fails or times out on the first try, wait a bit and try again.
+
 ## Tech Stack
 
 - React
@@ -26,6 +36,8 @@ https://github.com/aldask/JobFit_BE
 - Tailwind CSS
 - FastAPI
 - Google Gemini API
+- Vercel
+- Render
 
 ## Run Locally
 
