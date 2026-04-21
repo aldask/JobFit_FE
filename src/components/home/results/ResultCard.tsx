@@ -1,9 +1,8 @@
 import { useState } from "react";
-import type { ResultCardProps } from "../../../types/app";
+import type { CopyState, ResultCardProps } from "../../../types/app";
+import HighlightedText from "./HighlightedText";
 
-type CopyState = "idle" | "copied" | "failed";
-
-export default function ResultCard({ title, body }: ResultCardProps) {
+export default function ResultCard({ title, body, keywords }: ResultCardProps) {
   const [copyState, setCopyState] = useState<CopyState>("idle");
 
   async function handleCopy() {
@@ -30,7 +29,7 @@ export default function ResultCard({ title, body }: ResultCardProps) {
         {title}
       </h3>
       <pre className="mt-3 whitespace-pre-wrap text-sm leading-7 text-slate-600">
-        {body}
+        <HighlightedText text={body} keywords={keywords} />
       </pre>
       <button
         type="button"

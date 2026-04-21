@@ -1,4 +1,4 @@
-import { useId } from "react";
+import { type ChangeEvent, useId } from "react";
 import type { ResumeFormProps } from "../../types/app";
 import FormSection from "./FormSection";
 
@@ -6,6 +6,7 @@ export default function ResumeForm({
   jobDescription,
   fileError,
   resumeFile,
+  canSubmit,
   onSubmit,
   onJobDescriptionChange,
   onResumeFileChange,
@@ -14,7 +15,7 @@ export default function ResumeForm({
   const fileInputId = useId();
   const descriptionId = useId();
 
-  function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] ?? null;
     onResumeFileChange(file);
     event.target.value = "";
@@ -22,18 +23,15 @@ export default function ResumeForm({
 
   return (
     <section className="rounded-4xl border border-slate-200 bg-slate-50 p-4 sm:p-5">
-      <div className="flex flex-col gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="flex flex-col gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-widest text-blue-600">
-            Input
-          </p>
           <h2 className="mt-2 font-heading text-3xl tracking-tighter text-slate-900">
             Add the role and resume
           </h2>
         </div>
 
         <p className="max-w-sm text-sm leading-6 text-slate-600">
-          Give the model enough context to write for this specific opportunity.
+          Give the model enough context to write for this specific opportunity
         </p>
       </div>
 
@@ -99,8 +97,8 @@ export default function ResumeForm({
         </p>
 
         <button
-          disabled={loading || !resumeFile || !jobDescription}
-          onClick={() => onSubmit({ resumeFile, jobDescription })}
+          disabled={!canSubmit}
+          onClick={onSubmit}
           className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white shadow-lg transition hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-300 disabled:shadow-none sm:w-auto"
         >
           {loading ? "Generating..." : "Generate drafts"}

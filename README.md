@@ -1,73 +1,109 @@
-# React + TypeScript + Vite
+# JobFit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+JobFit is a React + FastAPI app for generating a tailored resume draft and cover letter from a PDF resume and a job description.
 
-Currently, two official plugins are available:
+The frontend collects the inputs. The backend validates the PDF, sends the request to Gemini, and returns the generated drafts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Repositories
 
-## React Compiler
+Frontend:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```text
+https://github.com/aldask/JobFit_FE
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Backend:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```text
+https://github.com/aldask/JobFit_BE
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- FastAPI
+- Google Gemini API
+
+## Run Locally
+
+You need two terminals: one for the backend and one for the frontend.
+
+### 1. Clone The Repositories
+
+```powershell
+git clone https://github.com/aldask/JobFit_FE.git
+git clone https://github.com/aldask/JobFit_BE.git
+```
+
+### 2. Start The Backend
+
+```powershell
+cd JobFit_BE
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+copy .env.example .env
+```
+
+Generate a Gemini API key:
+
+```text
+https://aistudio.google.com/app/apikey
+```
+
+Add it to `JobFit_BE/.env`:
+
+```env
+GEMINI_API_KEY=your_gemini_api_key_here
+```
+
+Start the backend:
+
+```powershell
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+
+Backend runs at:
+
+```text
+http://localhost:8000
+```
+
+### 3. Start The Frontend
+
+Open a second terminal:
+
+```powershell
+cd JobFit_FE
+npm install
+npm run dev
+```
+
+Frontend runs at:
+
+```text
+http://localhost:5173
+```
+
+## Backend URL
+
+The frontend backend URL is defined in:
+
+```text
+src/api/routes.ts
+```
+
+For local development, use:
+
+```ts
+const API_BASE_URL = "http://localhost:8000";
+```
+
+For the hosted backend, use:
+
+```ts
+const API_BASE_URL = "https://jobfit-be.onrender.com";
 ```

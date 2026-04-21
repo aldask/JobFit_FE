@@ -5,7 +5,7 @@ export default function BuilderHeader({
   canGenerate,
 }: BuilderHeaderProps) {
   return (
-    <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 lg:flex-row lg:items-end lg:justify-between">
+    <div className="flex flex-col gap-4 border-b border-slate-200 pb-6 lg:flex-row lg:items-center lg:justify-between">
       <div>
         <h2 className="mt-2 font-heading text-3xl tracking-tighter text-slate-900 sm:text-4xl">
           Add inputs then review the generated drafts.
