@@ -7,8 +7,6 @@ export default function Layout({ children }: LayoutProps) {
         <div className="absolute -left-40 -top-32 h-80 w-80 rounded-full bg-blue-500/10 blur-3xl" />
         <div className="absolute -right-32 top-20 h-96 w-96 rounded-full bg-teal-500/10 blur-3xl" />
         <div className="absolute -bottom-48 left-1/3 h-96 w-96 rounded-full bg-white blur-3xl" />
-        <div className="absolute inset-y-0 left-20 w-px bg-slate-900/5" />
-        <div className="absolute inset-y-0 right-20 w-px bg-slate-900/5" />
       </div>
 
       <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-4 sm:px-6 lg:px-8">
