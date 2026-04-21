@@ -14,13 +14,6 @@ export function useApplicationBuilder() {
   const hasJobDescription = Boolean(jobDescription.trim());
   const hasResumeFile = Boolean(resumeFile);
   const canGenerate = hasJobDescription && hasResumeFile && !loading;
-  const status = loading
-    ? "generating"
-    : result
-      ? "ready"
-      : submitError
-        ? "error"
-        : "idle";
 
   function updateJobDescription(value: string) {
     setJobDescription(value);
@@ -86,7 +79,6 @@ export function useApplicationBuilder() {
     loading,
     result,
     resumeFile,
-    status,
     submitError,
     updateJobDescription,
     updateResumeFile,

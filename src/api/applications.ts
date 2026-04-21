@@ -7,6 +7,21 @@ import { apiRoutes } from "./routes";
 
 export const GENERATE_REQUEST_TIMEOUT_MS = 120_000;
 
+function isGenerateResumeResponse(
+  payload: unknown,
+): payload is GenerateResumeResponse {
+  if (!payload || typeof payload !== "object") {
+    return false;
+  }
+
+  const response = payload as Partial<GenerateResumeResponse>;
+
+  return (
+    typeof response.improvedResume === "string" &&
+    typeof response.coverLetter === "string"
+  );
+}
+
 export async function generateApplicationDrafts({
   jobDescription,
   resumeFile,
@@ -31,7 +46,13 @@ export async function generateApplicationDrafts({
       throw new Error(await getApiErrorMessage(response));
     }
 
-    return response.json() as Promise<GenerateResumeResponse>;
+    const payload = (await response.json()) as unknown;
+
+    if (!isGenerateResumeResponse(payload)) {
+      throw new Error("Backend returned an invalid response.");
+    }
+
+    return payload;
   } catch (error) {
     if (error instanceof DOMException && error.name === "AbortError") {
       throw new Error("Backend did not respond. Please try again later.");
